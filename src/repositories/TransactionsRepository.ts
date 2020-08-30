@@ -44,20 +44,9 @@ class TransactionsRepository {
   }
 
   public create({ title, value, type }: TransactionDTO): Transaction {
-    let totalIncome = 0;
-    this.transactions.forEach((transaction) => {
-      if( transaction.type === 'income' ){
-        totalIncome += transaction.value;
-      }
-    })
-    if(type === 'outcome' && value>totalIncome){
-        throw Error('Not enouth money')
-      }
-    else{
-      const transaction = new Transaction({ title, value, type })
-      this.transactions.push(transaction);
-      return(transaction);
-    }
+    const transaction = new Transaction({ title, value, type })
+    this.transactions.push(transaction);
+    return(transaction);
   }
 }
 
